@@ -1,10 +1,3 @@
-//
-//  SimplePageViewController.swift
-//  SmartDepart
-//
-//  Created by Oliver Poole on 03/01/2016.
-//  Copyright © 2016 OPApps. All rights reserved.
-//
 
 import Foundation
 import UIKit
