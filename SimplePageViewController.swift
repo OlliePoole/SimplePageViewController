@@ -6,6 +6,9 @@ class SimplePageViewController : UIPageViewController {
     
     var customViewControllers : Array<UIViewController>
     
+    /// Allows the page vew controlller to manage a page control
+    var pageControl : UIPageControl?
+    
     /**
      Initalises a new UIPageViewController and sets the view controllers passsed as a 
      parameter to the datasource
@@ -21,7 +24,7 @@ class SimplePageViewController : UIPageViewController {
         super.init(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         
         // Set the UIPageViewController view controllers and default settings
-        setViewControllers([customViewControllers.first!], direction: .Forward, animated: true, completion: nil)
+        setViewControllers([customViewControllers[0]], direction: .Forward, animated: true, completion: nil)
         dataSource = self
     }
 
@@ -36,28 +39,31 @@ extension SimplePageViewController : UIPageViewControllerDataSource {
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
-        let index = customViewControllers.indexOf(viewController)
+        var nextViewController : UIViewController?
         
-        if index == customViewControllers.count - 1 {
-            return nil
+        if let index = customViewControllers.indexOf(viewController) {
+            pageControl?.currentPage = index
+            
+            if index != customViewControllers.count - 1 {
+                nextViewController = customViewControllers[index + 1]
+            }
         }
-        else {
-            return customViewControllers[index! + 1]
-        }
+        
+        return nextViewController
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
-        let index = customViewControllers.indexOf(viewController)
+        var nextViewController : UIViewController?
         
-        if index == 0 {
-            return nil
+        if let index = customViewControllers.indexOf(viewController) {
+            pageControl?.currentPage = index
+            
+            if index != 0 {
+                nextViewController = customViewControllers[index - 1]
+            }
         }
-        else {
-            return customViewControllers[index! - 1]
-        }
+        
+        return nextViewController
     }
-    
 }
-
-
