@@ -2,12 +2,12 @@
 import Foundation
 import UIKit
 
-class SimplePageViewController : UIPageViewController {
+final class SimplePageViewController: UIPageViewController {
     
-    var customViewControllers : Array<UIViewController>
+    var customViewControllers: Array<UIViewController>
     
-    /// Allows the page vew controlller to manage a page control
-    var pageControl : UIPageControl?
+    /// Allows the page view controlller to manage a page control
+    var pageControl: UIPageControl?
     
     /**
      Initalises a new UIPageViewController and sets the view controllers passsed as a 
@@ -15,7 +15,7 @@ class SimplePageViewController : UIPageViewController {
      
      - parameter viewControllers: The view controllers included in the UIPageViewController
      */
-    init (withViewControllers viewControllers : Array<UIViewController>) {
+    init (withViewControllers viewControllers: Array<UIViewController>) {
 
         // Initalise the properties
         self.customViewControllers = viewControllers
@@ -35,11 +35,11 @@ class SimplePageViewController : UIPageViewController {
     }    
 }
 
-extension SimplePageViewController : UIPageViewControllerDataSource {
+extension SimplePageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
-        var nextViewController : UIViewController?
+        var nextViewController: UIViewController?
         
         if let index = customViewControllers.indexOf(viewController) {
             pageControl?.currentPage = index
@@ -54,7 +54,7 @@ extension SimplePageViewController : UIPageViewControllerDataSource {
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
-        var nextViewController : UIViewController?
+        var nextViewController: UIViewController?
         
         if let index = customViewControllers.indexOf(viewController) {
             pageControl?.currentPage = index
